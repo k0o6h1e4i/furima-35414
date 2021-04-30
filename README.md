@@ -11,7 +11,7 @@
 |last_name | string | null: false |
 |first_kana| string | null: false |
 |last_kana | string | null: false |
-| birthday | string | null: false |
+| birthday |  date  | null: false |
 
 
 ### Association
@@ -25,7 +25,6 @@
 | ------    | ---------- | ----------- |
 | title     | string     | null: false |
 | text      | text       | null: false |
-| image     |            | null: false |
 | price     | integer    | null: false |
 | state_id  | integer    | null: false |
 |category_id| integer    | null: false |
@@ -55,8 +54,8 @@
 |postal_code   | string     | null: false |
 |prefecture_id | integer    | null: false |
 | city         | string     | null: false |
-|street_address| text       | null: false |
-|building_name | text       |             |
+|street_address| string     | null: false |
+|building_name | string     |             |
 |telephone     | string     | null: false |
 | buyer        | references | null:false, foreign_key: true|
 

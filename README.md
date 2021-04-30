@@ -11,14 +11,13 @@
 |last_name | string | null: false |
 |first_kana| string | null: false |
 |last_kana | string | null: false |
-| item     | string | null: false |
-| date     | string | null: false |
+| birthday | string | null: false |
 
 
 ### Association
 
 - has_many :items
-- has_many :comments
+- has_one :buyer
 
 ## items テーブル
 
@@ -58,6 +57,6 @@
 |street_address| text       | null: false |
 |building_name | text       |             |
 |telephone     | string     | null: false |
-| buyer     | references | null:false, foreign_key: true |
+| buyer        | references | null:false, foreign_key: true|
 
 - belongs_to :buyer

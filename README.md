@@ -17,7 +17,7 @@
 ### Association
 
 - has_many :items
-- has_one :buyer
+- has_many :buyers
 
 ## items テーブル
 
@@ -46,12 +46,13 @@
 
 - belongs_to :item
 - has_one :address
+- belongs_to :user
 
 ## address テーブル
 
 | Column       | Type       | Options     |
 | ---------    | ---------- | ----------- |
-|postal_code   | integer    | null: false |
+|postal_code   | string     | null: false |
 |prefecture_id | integer    | null: false |
 | city         | string     | null: false |
 |street_address| text       | null: false |

@@ -59,6 +59,12 @@ require 'rails_helper'
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
 
+      it "パスワードが英字のみの場合は登録できない" do
+        @user.password = "tytyty"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+
       it "パスワードが全角の場合は登録できない" do
         @user.password = "１２３４５６"
         @user.valid?

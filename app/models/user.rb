@@ -4,7 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true
+  with_options presence:true do
+   validates :nickname, presence: true
+   validates :birthday, presence: true 
+  end       
+   
 
   with_options format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i}do
     validates :password
@@ -19,9 +23,4 @@ class User < ApplicationRecord
   validates :first_kana
   validates :last_kana
  end
-
-  validates :birthday, presence: true
-  
-
-
 end

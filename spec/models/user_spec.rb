@@ -27,12 +27,6 @@ require 'rails_helper'
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
 
-      it "emailの中に@が無いと登録できない" do
-        @user.email = "llllll"
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
-      end
-
       it "重複するemailが存在する場合登録できない" do
         @user.save
         another_user = FactoryBot.build(:user)
@@ -59,8 +53,14 @@ require 'rails_helper'
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
 
-      it "半角英数字混合でないと登録できない" do
-        @user.password = "tttttt"
+      it "パスワードが半角数字のみの場合は登録できない" do
+        @user.password = "123456"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+
+      it "パスワードが全角の場合は登録できない" do
+        @user.password = "１２３４５６"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end

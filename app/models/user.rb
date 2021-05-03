@@ -16,8 +16,8 @@ class User < ApplicationRecord
  end
 
  with_options presence:true,format: {with:/\A[ァ-ヶ一-]+\z/}do
-  validates :first_kana, presence: true
-  validates :last_kana, presence: true
+  validates :first_kana
+  validates :last_kana
  end
 
   validates :birthday, presence: true

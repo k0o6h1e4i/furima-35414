@@ -13,14 +13,14 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence:true do
-    validates :title, presence: true
-    validates :text, presence: true 
-    validates :price,presence: true
-    validates :state_id, presence: true
-    validates :category_id, presence: true
-    validates :postage_id, presence: true
-    validates :prefecture_id, presence: true
-    validates :shipping_day_id, presence: true
+    validates :title
+    validates :text
+    validates :price,numericality: { only_integer: true ,greater_than:299,less_than:10000000} 
+    validates :state_id
+    validates :category_id
+    validates :postage_id
+    validates :prefecture_id
+    validates :shipping_day_id
 
     validates :category_id, numericality: { other_than: 1 } 
     validates :shipping_day_id, numericality: { other_than: 1 } 

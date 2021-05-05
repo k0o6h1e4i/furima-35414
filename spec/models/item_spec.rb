@@ -30,9 +30,9 @@ require 'rails_helper'
       end
 
       it "商品説明が空だと出品できない" do
-        @item.title = ""
+        @item.text = ""
         @item.valid?
-        expect(@item.errors.full_messages).to include("Title can't be blank")
+        expect(@item.errors.full_messages).to include("Text can't be blank")
       end
 
       it "カテゴリーが空では出品できない" do

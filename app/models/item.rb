@@ -22,13 +22,15 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :shipping_day_id
     validates :image
+  end
 
+  with_options numericality: { other_than: 1 } do
     validates :category_id, numericality: { other_than: 1 } 
     validates :shipping_day_id, numericality: { other_than: 1 } 
     validates :state_id, numericality: { other_than: 1 } 
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :postage_id, numericality: { other_than: 1 }  
-   end   
+  end   
 
 
 end

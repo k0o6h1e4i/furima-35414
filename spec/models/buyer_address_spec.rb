@@ -10,10 +10,13 @@ RSpec.describe BuyerAddress, type: :model do
       sleep(0.1)
     end
 
-    context '内容に問題ない場合' do
+   describe "商品購入" do
+    context '購入できる場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
+        expect(@buyer_address).to be_valid
       end
     end
+  end
 
     context '内容に問題がある場合' do
       it '郵便番号が空だと保存できないこと' do
@@ -39,7 +42,7 @@ RSpec.describe BuyerAddress, type: :model do
       it '番地が空では保存できないこと' do
         @buyer_address.street_address = ""
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Prefecture is invalid", "Street address can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("Street address can't be blank")
       end
       it '電話番号が空では保存できないこと' do
         @buyer_address.telephone = ""
@@ -52,16 +55,34 @@ RSpec.describe BuyerAddress, type: :model do
         expect(@buyer_address.errors.full_messages).to include("Telephone is invalid")
       end
       it '電話番号は9桁以下では保存できないこと'do
+        @buyer_address.telephone = "080123456"
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Telephone is invalid")
       end
       it '電話番号は全角英数字では保存できないこと'do
+        @buyer_address.telephone = "０８０１２３４５６７８"
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Telephone is invalid")
       end
       it '電話番号は英数混合では保存できないこと'do
+        @buyer_address.telephone = "0i0i0i0i0i"
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Telephone is invalid")
       end
       it 'userが紐付いていないと保存できないこと' do
+        @buyer_address.user_id = nil
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("User can't be blank")
       end
       it 'itemが紐付いていないと保存できないこと'do
+        @buyer_address.item_id = nil
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Item can't be blank")
       end
       it 'tokenが紐付いていないと保存できないこと'do
+        @buyer_address.token = nil
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end

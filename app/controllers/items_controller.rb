@@ -15,6 +15,9 @@ class ItemsController < ApplicationController
  end
 
  def edit
+  if @item.buyer.present?
+    redirect_to root_path
+  end
  end
 
  def destroy
@@ -52,7 +55,7 @@ class ItemsController < ApplicationController
   end
 
   def require_item_user
-    unless current_user.id == @item.user_id
+    unless current_user.id == @item.user_id || @item.buyer.present?
       redirect_to root_path    
     end
   end

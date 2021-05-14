@@ -8,7 +8,6 @@ class BuyerAddress
     validates :prefecture_id, numericality:  { other_than: 1, message: "is invalid"}
     validates :city
     validates :street_address
-    validates :building_name
     validates :telephone ,format: {with: /\A\d{10,11}\z/} 
     validates :item_id
     validates :token

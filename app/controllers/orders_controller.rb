@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action  :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :require_item_user, only:[:index, :create]
 
   def index
     @buyer_address = BuyerAddress.new
@@ -38,6 +39,12 @@ class OrdersController < ApplicationController
       card: buyer_params[:token],   
       currency: 'jpy'                 
     )
+  end
+
+  def require_item_user
+    if current_user.id == @item.user_id || @item.buyer.present?
+      redirect_to root_path    
+    end
   end
 
 end

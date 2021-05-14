@@ -5,9 +5,6 @@ class OrdersController < ApplicationController
 
   def index
     @buyer_address = BuyerAddress.new
-    if @item.buyer.present?
-      redirect_to root_path
-    end
   end
 
   def create
@@ -33,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_d2948e1f8b324683037be981"  
+    Payjp.api_key = Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
     Payjp::Charge.create(
       amount: @item.price,  
       card: buyer_params[:token],   

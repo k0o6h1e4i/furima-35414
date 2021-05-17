@@ -4,11 +4,11 @@ class BuyerAddress
 
   with_options presence: true do
     validates :user_id
-    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
-    validates :prefecture_id, numericality:  { other_than: 1, message: "is invalid"}
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "には半角のハイフンを含んでください"}
+    validates :prefecture_id, numericality:  { other_than: 1, message: "を入力してください"}
     validates :city
     validates :street_address
-    validates :telephone ,format: {with: /\A\d{10,11}\z/} 
+    validates :telephone ,format: {with: /\A\d{10,11}\z/, message: "は半角英数字のみの10桁か11桁で入力してください"} 
     validates :item_id
     validates :token
   end
